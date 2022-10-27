@@ -1,0 +1,254 @@
+
+<head>
+    <link rel="stylesheet" href="../css/vali.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+  <div class="header">
+    <h2>TOKEN ASSIGNING</h2>
+  </div>
+  <form class="form" id="form">
+    <div class="form-control">
+      <label>Reciver's Username</label>
+      <input type="text" id="username" placeholder="Kagezi@carrier">
+      <i class='bx bxs-x-circle'></i>
+            <i class='bx bxs-check-circle'></i>
+      <small>Error message</small>
+    </div>
+  <form class="form" id="form">
+    <div class="form-control">
+      <label>Token Number</label>
+      <input type="text" id="username" placeholder="F54GKJDF">
+      <i class='bx bxs-x-circle'></i>
+            <i class='bx bxs-check-circle'></i>
+      <small>Error message</small>
+    </div>
+
+    <div class="form-control">
+      <label>confirm Token</label>
+      <input type="text" placeholder="F54GKJDF" id="password">
+      <i class="fas fa-check-circle"></i>
+      <i class='bx bxs-x-circle'></i>
+    <i class='bx bxs-check-circle'></i>
+      <small>Error message</small>
+    </div>
+     
+    
+
+    <button onclick="ConfirmAdd()" >Submit</button> <br>
+
+    &nbsp;
+
+   <a href="../admin/admin.php"><button>back</button></a> 
+
+  </form>
+
+</div>
+
+</body>
+<script>
+    function ConfirmAdd() {
+        var result = confirm('Are you sure you want to assign token?');
+        if(result == false) {
+            event.preventDefault();
+        }
+        
+    }
+    // function ConfirmReset() {
+    //     var result = confirm('All unsaved data will be lost. Continue Reset?');
+    //     if(result == false) {
+    //         event.preventDefault();
+    //     }
+        
+    // }
+</script>
+<style>
+    
+/* 
+* {
+    /* boox-sizing: border-box; 
+  } */
+  
+  body {
+    background-color: #e93626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: open sans, sans-serif;
+  }
+  
+  .container {
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .header {
+    background-color: #f7f7f7;
+    padding: 20px 40px;
+    border-bottom: 1px solid #f0f0f0;
+    /*   color:#9b59b6; */
+  }
+  
+  .header h2 {
+    margin: 0;
+  }
+  
+  form {
+    padding: 30px 60px;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+  
+  .form-control label {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  
+  .form-control input {
+    display: block;
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    width: 100%;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 14px;
+  }
+  
+  .form-control.success input {
+    border-color: #2ecc71;
+  }
+  
+  .form-control.error input {
+    border-color: #d0021b;
+  }
+  
+  .form-control i {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    visibility: hidden;
+  }
+  
+  .form-control.success i.bxs-check-circle {
+    color: #2ecc71;
+    visibility: visible;
+  }
+  
+  .form-control.error i.bxs-x-circle {
+    color: #d0021b;
+    visibility: visible;
+  }
+  
+  .form-control small {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+  }
+  
+  .form-control.error small {
+    visibility: visible;
+    color: #d0021b;
+  }
+  
+  .form button {
+    background-color: #f94040;
+    border: 2px solid #f94040;
+    border-radius: 4px;
+    width: 108%;
+    display: block;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    padding: 10px;
+  }
+   button [type ='submit'] {
+    background-color: forestgreen;
+    border: 2px solid #f94040;
+    border-radius: 4px;
+    width: 108%;
+    display: block;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    padding: 10px;
+  }
+</style>
+<script>
+
+const form = document.getElementById("form");
+const username = document.getElementById("username");
+
+const password = document.getElementById("password");
+
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+
+  checkInputs();
+});
+
+function checkInputs() {
+  //check for their values
+
+  const usernameValue = username.value.trim();
+ 
+  const passwordValue = password.value.trim();
+ 
+
+  if (usernameValue === "") {
+    //show and add error class
+    setErrorFor(username, "Username cannot be blank");
+  } else {
+    //add success class
+    setSuccessFor(username);
+  }
+
+
+
+  if (passwordValue === "") {
+    setErrorFor(password, "Please enter a password");
+  } else if (!strongPass(passwordValue)) {
+    setErrorFor(password, "Enter stronger password");
+  } else {
+    setSuccessFor(password);
+  }
+
+
+}
+
+function setSuccessFor(input) {
+  const formControl = input.parentElement;
+  formControl.className = "form-control success";
+}
+
+function setErrorFor(input, message) {
+  const formControl = input.parentElement;
+  const small = formControl.querySelector("small");
+
+  small.innerText = message;
+  formControl.className = "form-control error";
+}
+
+
+
+</script>
+</html> 
+
+<?php 
+} else {
+    header("location:../index.php");
+}
+?>
